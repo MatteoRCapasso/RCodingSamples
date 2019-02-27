@@ -1,0 +1,23 @@
+
+flag <- 0
+desiredSize <- 3
+headsCounter <- 0
+tailsCounter <- 0
+
+while(flag != desiredSize){
+
+  randomNumber <- rnorm(1,0,1)
+  
+  if(randomNumber < 0)
+  {headsCounter <- headsCounter + 1}
+    else {tailsCounter <- tailsCounter + 1}
+  
+  rm(randomNumber)
+  flag <- flag + 1
+}
+
+print(paste0("Number of heads: ", headsCounter))
+print(paste0("Number of tails: ", tailsCounter))
+print(paste0("Sample Size: ", desiredSize))
+print(paste0("% of Heads: ", 100*headsCounter/desiredSize))
+print(paste0("% of Tails: ", 100*tailsCounter/desiredSize))
