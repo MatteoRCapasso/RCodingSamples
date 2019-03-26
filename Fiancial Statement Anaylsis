@@ -1,0 +1,86 @@
+## Creator: Matteo Capasso
+## Date: 3/21/2019
+## Language: R
+## HOMEWORK: Fiancial Statement Anaylsis
+
+## Question Prompt:
+## You have been supplied with two vectors of data: monthly revenue and monthly expenses 
+## for the fiancial year in quesition. Your task is to calculate the following financial metrics:
+
+### Find Metrics: 
+### - profit for each month
+### - profit after tax for each month (the tax rate is 30%)
+### - profit margin for each month - equals to profit after tax divided by revenue
+### - good months - where the profit after tax was greater than the mean for the year
+### - bad months - where profit after tax was less than the mean for the year
+### - the best month - where the profit after tax was max for the year
+### - the worst month - where the profit after tax was min for the year
+
+### Note: 
+### - All results need to be presented as vectors.
+### - Results for the dollar values need to be calculated with $0.01 precision, but need to be pr
+###   but need to be presented in Units of $1,000 (i.e. 1k) with no decimal points.
+### - Results for the proft margin ratio need to be presented in units of % with no decimal points.
+### - Your colleague has warned you that it is okay for tax for any given month
+###   to be negative (in accounting terms, negative tax translates into a deferred tax asset).
+
+
+####Solution####
+#Given Data / Input
+revenue <- c(14574.49, 7606.46, 8611.41, 9175.41, 8058.65, 8105.44, 11496.28, 9766.09, 10305.32, 14379.96, 10713.97, 15433.50)
+expenses <- c(12051.82, 5695.07, 12319.20, 12089.72, 8658.57, 840.20, 3285.73, 5821.12, 6976.93, 16618.61, 10054.37, 3803.96)
+taxRate <- 0.3
+
+#Operations
+# - profit for each month
+monthlyProfit <- revenue - expenses 
+
+# - profit after tax for each month (the tax rate is 30%)
+profitAfterTax <- round(monthlyProfit*(1-taxRate),2)
+
+# - profit margin for each month - equals to profit after tax divided by revenue
+profitMarginPerMonth <- 100*round(profitAfterTax/revenue,2)
+
+# - good months - where the profit after tax was greater than the mean for the year
+goodMonths <- profitAfterTax > mean(profitAfterTax)
+
+# - bad months - where profit after tax was less than the mean for the year
+badMonths <- !goodMonths
+
+# - the best month - where the profit after tax was max for the year
+bestMonth <- max(monthlyProfit) == monthlyProfit
+
+# - the worst month - where the profit after tax was min for the year
+worstMonth <- min(monthlyProfit) == monthlyProfit
+
+
+#Data Formatting
+revenue <- round(revenue/1000)
+expenses <- round(expenses/1000)
+monthlyProfit <- round(monthlyProfit/1000)
+profitAfterTax <- round(profitAfterTax/1000)
+
+#Output
+revenue
+expenses
+monthlyProfit
+profitAfterTax
+profitMarginPerMonth
+goodMonths
+badMonths
+bestMonth
+worstMonth
+
+
+#matrices
+m <- rbind(
+  revenue,
+  expenses,
+  monthlyProfit,
+  profitAfterTax,
+  profitMarginPerMonth,
+  goodMonths,
+  badMonths,
+  bestMonth,
+  worstMonth
+)
